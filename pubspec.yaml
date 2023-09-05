@@ -1,0 +1,24 @@
+name: garbage_control
+description: A Flutter project for login and registration forms with getx navigation
+version: 1.0.0
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.1.4  # for navigation
+  flutter_signin_button: ^2.0.0  # for social login buttons
+  font_awesome_flutter: ^9.1.0  # for icon fonts
+  http: ^0.13.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - lib/main.dart
+    - assets/logo.png.webp
+  uses-material-design: true
