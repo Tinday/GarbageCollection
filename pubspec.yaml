@@ -1,0 +1,48 @@
+name: garbage_control
+description: A Flutter project for login and registration forms with getx navigation
+version: 1.0.0
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.5
+  http: ^0.13.5
+  async_redux: ^20.0.2
+  flutter_svg: ^2.0.7
+  pin_code_fields: ^8.0.1
+  dotted_border: ^2.0.0+2
+  json_serializable: ^6.3.1
+  freezed: ^2.1.0+1
+  freezed_annotation: ^2.1.0
+  json_annotation: ^4.6.0
+  dio: ^5.1.1
+  sqflite: ^2.0.3+1
+  quiver: ^3.1.0
+  path: ^1.8.1
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.9.0
+  google_sign_in: ^6.1.4
+  camera: ^0.10.0+1
+  local_auth: ^2.1.2
+  meta: ^1.7.0
+  path_provider: ^2.0.11
+  flutter_html: ^3.0.0-alpha.5
+  youtube_player_flutter: ^8.1.0
+  intl: ^0.18.0
+  webview_flutter: ^4.2.4
+
+dev_dependencies:
+  flutter_lints: ^2.0.3
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.2.0
+
+flutter:
+  assets:
+    - lib/main.dart
+    - assets/logo.png.webp
+  uses-material-design: true
