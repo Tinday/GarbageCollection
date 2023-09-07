@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/core/utils.dart';
 import 'package:garbage_control/constants/strings.dart';
@@ -79,7 +80,31 @@ class _LoginFormState extends State<LoginForm> {
                   formKey.currentState!.save();
                   formKey.currentState!.reset();
                   displayLoadingDialog(context: context);
+                  final String email = variables['email'];
+                  final String pass = variables['password'];
 
+                  try {
+                    final UserCredential credential =
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: email,
+                      password: pass,
+                    );
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'user-not-found') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('No user found for that email.'),
+                        ),
+                      );
+                    } else if (e.code == 'wrong-password') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                              Text('Wrong password provided for that user.'),
+                        ),
+                      );
+                    }
+                  }
                   variables.clear();
                 }
               },
