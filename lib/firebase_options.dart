@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -45,7 +48,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCEJrnAluJb-p8uHCmP5WnK3__PP9TXF0Y',
-    appId: '1:1059209286670:web:199f0729b7b928aeab985f',
+    appId: '1:1059209286670:web:86153999ac09c057ab985f',
     messagingSenderId: '1059209286670',
     projectId: 'garbagecollection-e3d40',
     authDomain: 'garbagecollection-e3d40.firebaseapp.com',
@@ -54,7 +57,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBUNIgUT6fGqTQj8JJM2i_RCHxGzHPPplQ',
-    appId: '1:1059209286670:android:f2d49c5a76e2d907ab985f',
+    appId: '1:1059209286670:android:b7217b8c66f5ef5aab985f',
     messagingSenderId: '1059209286670',
     projectId: 'garbagecollection-e3d40',
     storageBucket: 'garbagecollection-e3d40.appspot.com',
@@ -62,21 +65,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBSH7Ra7rC1TGbOZR75nL0OxcSDDRXCwtY',
-    appId: '1:1059209286670:ios:3301d0e661204873ab985f',
+    appId: '1:1059209286670:ios:50f92f81e37c3b75ab985f',
     messagingSenderId: '1059209286670',
     projectId: 'garbagecollection-e3d40',
     storageBucket: 'garbagecollection-e3d40.appspot.com',
-    iosClientId: '1059209286670-jt3u0be4ju59v0pv608oaqagnreebmaa.apps.googleusercontent.com',
-    iosBundleId: 'com.example.loginPage',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBSH7Ra7rC1TGbOZR75nL0OxcSDDRXCwtY',
-    appId: '1:1059209286670:ios:3301d0e661204873ab985f',
-    messagingSenderId: '1059209286670',
-    projectId: 'garbagecollection-e3d40',
-    storageBucket: 'garbagecollection-e3d40.appspot.com',
-    iosClientId: '1059209286670-jt3u0be4ju59v0pv608oaqagnreebmaa.apps.googleusercontent.com',
-    iosBundleId: 'com.example.loginPage',
+    iosClientId: '1059209286670-0iskpntdiigrujb1ghk2jb3jdhe76n4f.apps.googleusercontent.com',
+    iosBundleId: 'com.example.garbageCollection',
   );
 }
