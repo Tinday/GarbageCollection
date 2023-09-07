@@ -1,4 +1,4 @@
-package com.example.login_page
+package com.example.garbage_collection
 
 import io.flutter.embedding.android.FlutterActivity
 
