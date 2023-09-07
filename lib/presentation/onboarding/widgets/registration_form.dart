@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/core/utils.dart';
 import 'package:garbage_control/constants/strings.dart';
@@ -5,9 +6,7 @@ import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
 
 class RegistrationForm extends StatefulWidget {
-  const RegistrationForm({
-    Key? key,
-  }) : super(key: key);
+  const RegistrationForm({Key? key}) : super(key: key);
 
   @override
   State<RegistrationForm> createState() => _RegistrationFormState();
@@ -102,6 +101,41 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
                   displayLoadingDialog(context: context);
+                  final String email = variables['email'];
+                  final String pass = variables['password'];
+
+                  try {
+                    final UserCredential credential = await FirebaseAuth
+                        .instance
+                        .createUserWithEmailAndPassword(
+                      email: email,
+                      password: pass,
+                    );
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('The password provided is too weak.'),
+                        ),
+                      );
+                    } else if (e.code == 'email-already-in-use') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'The account already exists for that email.',
+                          ),
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'An error occurred creating the account. Please try again later.',
+                        ),
+                      ),
+                    );
+                  }
 
                   variables.clear();
                 }
