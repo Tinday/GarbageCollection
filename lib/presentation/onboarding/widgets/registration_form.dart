@@ -4,6 +4,7 @@ import 'package:garbage_control/application/core/utils.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
+import 'package:garbage_control/presentation/core/routes.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({Key? key}) : super(key: key);
@@ -111,6 +112,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       email: email,
                       password: pass,
                     );
+                    Navigator.of(context).pushReplacementNamed(homePageRoute);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       ScaffoldMessenger.of(context).showSnackBar(

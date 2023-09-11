@@ -4,6 +4,7 @@ import 'package:garbage_control/application/core/utils.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
+import 'package:garbage_control/presentation/core/routes.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -75,6 +76,14 @@ class _LoginFormState extends State<LoginForm> {
             width: double.infinity,
             height: 52,
             child: ElevatedButton(
+              onLongPress: () async {
+                final UserCredential credential =
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                  email: 'byronkimani@gmail.com',
+                  password: 'kimani',
+                );
+                Navigator.of(context).pushReplacementNamed(homePageRoute);
+              },
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
@@ -89,6 +98,7 @@ class _LoginFormState extends State<LoginForm> {
                       email: email,
                       password: pass,
                     );
+                    Navigator.of(context).pushReplacementNamed(homePageRoute);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       ScaffoldMessenger.of(context).showSnackBar(

@@ -2,6 +2,7 @@
 
 import 'package:async_redux/async_redux.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:garbage_control/application/redux/states/bottom_navigation_state.dart';
 
 part 'app_state.freezed.dart';
 part 'app_state.g.dart';
@@ -13,6 +14,7 @@ class AppState with _$AppState {
   factory AppState({
     // AuthCredentialsState? authCredentialsState,
     // UserState? userState,
+    BottomNavigationState? bottomNavigationState,
     @JsonKey(includeFromJson: false, includeToJson: false) Wait? wait,
   }) = _AppState;
 
@@ -22,6 +24,7 @@ class AppState with _$AppState {
   factory AppState.initial() => AppState(
         // authCredentialsState: AuthCredentialsState.initial(),
         // userState: UserState.initial(),
+        bottomNavigationState: BottomNavigationState.initial(),
         wait: Wait(),
       );
 }

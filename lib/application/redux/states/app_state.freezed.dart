@@ -22,6 +22,8 @@ AppState _$AppStateFromJson(Map<String, dynamic> json) {
 mixin _$AppState {
 // AuthCredentialsState? authCredentialsState,
 // UserState? userState,
+  BottomNavigationState? get bottomNavigationState =>
+      throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   Wait? get wait => throw _privateConstructorUsedError;
 
@@ -37,7 +39,10 @@ abstract class $AppStateCopyWith<$Res> {
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
   $Res call(
-      {@JsonKey(includeFromJson: false, includeToJson: false) Wait? wait});
+      {BottomNavigationState? bottomNavigationState,
+      @JsonKey(includeFromJson: false, includeToJson: false) Wait? wait});
+
+  $BottomNavigationStateCopyWith<$Res>? get bottomNavigationState;
 }
 
 /// @nodoc
@@ -53,14 +58,32 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bottomNavigationState = freezed,
     Object? wait = freezed,
   }) {
     return _then(_value.copyWith(
+      bottomNavigationState: freezed == bottomNavigationState
+          ? _value.bottomNavigationState
+          : bottomNavigationState // ignore: cast_nullable_to_non_nullable
+              as BottomNavigationState?,
       wait: freezed == wait
           ? _value.wait
           : wait // ignore: cast_nullable_to_non_nullable
               as Wait?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BottomNavigationStateCopyWith<$Res>? get bottomNavigationState {
+    if (_value.bottomNavigationState == null) {
+      return null;
+    }
+
+    return $BottomNavigationStateCopyWith<$Res>(_value.bottomNavigationState!,
+        (value) {
+      return _then(_value.copyWith(bottomNavigationState: value) as $Val);
+    });
   }
 }
 
@@ -72,7 +95,11 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(includeFromJson: false, includeToJson: false) Wait? wait});
+      {BottomNavigationState? bottomNavigationState,
+      @JsonKey(includeFromJson: false, includeToJson: false) Wait? wait});
+
+  @override
+  $BottomNavigationStateCopyWith<$Res>? get bottomNavigationState;
 }
 
 /// @nodoc
@@ -86,9 +113,14 @@ class __$$_AppStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bottomNavigationState = freezed,
     Object? wait = freezed,
   }) {
     return _then(_$_AppState(
+      bottomNavigationState: freezed == bottomNavigationState
+          ? _value.bottomNavigationState
+          : bottomNavigationState // ignore: cast_nullable_to_non_nullable
+              as BottomNavigationState?,
       wait: freezed == wait
           ? _value.wait
           : wait // ignore: cast_nullable_to_non_nullable
@@ -101,7 +133,8 @@ class __$$_AppStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AppState implements _AppState {
   _$_AppState(
-      {@JsonKey(includeFromJson: false, includeToJson: false) this.wait});
+      {this.bottomNavigationState,
+      @JsonKey(includeFromJson: false, includeToJson: false) this.wait});
 
   factory _$_AppState.fromJson(Map<String, dynamic> json) =>
       _$$_AppStateFromJson(json);
@@ -109,12 +142,14 @@ class _$_AppState implements _AppState {
 // AuthCredentialsState? authCredentialsState,
 // UserState? userState,
   @override
+  final BottomNavigationState? bottomNavigationState;
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final Wait? wait;
 
   @override
   String toString() {
-    return 'AppState(wait: $wait)';
+    return 'AppState(bottomNavigationState: $bottomNavigationState, wait: $wait)';
   }
 
   @override
@@ -122,12 +157,14 @@ class _$_AppState implements _AppState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppState &&
+            (identical(other.bottomNavigationState, bottomNavigationState) ||
+                other.bottomNavigationState == bottomNavigationState) &&
             (identical(other.wait, wait) || other.wait == wait));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, wait);
+  int get hashCode => Object.hash(runtimeType, bottomNavigationState, wait);
 
   @JsonKey(ignore: true)
   @override
@@ -145,13 +182,16 @@ class _$_AppState implements _AppState {
 
 abstract class _AppState implements AppState {
   factory _AppState(
-      {@JsonKey(includeFromJson: false, includeToJson: false)
+      {final BottomNavigationState? bottomNavigationState,
+      @JsonKey(includeFromJson: false, includeToJson: false)
       final Wait? wait}) = _$_AppState;
 
   factory _AppState.fromJson(Map<String, dynamic> json) = _$_AppState.fromJson;
 
   @override // AuthCredentialsState? authCredentialsState,
 // UserState? userState,
+  BottomNavigationState? get bottomNavigationState;
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Wait? get wait;
   @override
