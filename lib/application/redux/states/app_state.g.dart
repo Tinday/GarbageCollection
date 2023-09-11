@@ -1,14 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'app_state.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AppState _$$_AppStateFromJson(Map<String, dynamic> json) => _$_AppState();
+_$_AppState _$$_AppStateFromJson(Map<String, dynamic> json) => _$_AppState(
+      bottomNavigationState: json['bottomNavigationState'] == null
+          ? null
+          : BottomNavigationState.fromJson(
+              json['bottomNavigationState'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$$_AppStateToJson(_$_AppState instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'bottomNavigationState': instance.bottomNavigationState,
+    };
