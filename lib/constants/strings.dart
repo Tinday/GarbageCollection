@@ -39,3 +39,21 @@ const String pleaseEnterDescription = 'Please enter description';
 const String pleaseEnterField = 'This field is required';
 const String loading = 'Loading...';
 const String phoneNumber = 'Phone number';
+const String logOut = 'LOG OUT';
+const String manageYourPassword = 'MANAGE YOUR PASSWORD';
+const String changePassword = 'Change password';
+const String update = 'Update';
+const String currentPassword = 'Current password';
+const String currentEmail = 'Current email';
+const String newEmail = 'New email';
+const String currentUserName = 'Current user name';
+const String newUserName = 'New user name';
+const String newPassword = 'New password';
+const String confirmNewPassword = 'Confirm new password';
+const String edit = 'Edit';
+const String forgotPasswordDescription =
+    'We will send an email with instructions on resetting your password.';
+const String resetEmailSent = 'Reset Email Sent';
+const String resetEmailDescription =
+    'An email has been sent to your account with instructions on how to reset your password. It will expire after 24 hours.';
+const String done = 'Done';

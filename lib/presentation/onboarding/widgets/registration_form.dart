@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/core/utils.dart';
@@ -112,6 +113,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       email: email,
                       password: pass,
                     );
+                    Navigator.of(context).pushReplacementNamed(homePageRoute);
+                    CollectionReference users =
+                        FirebaseFirestore.instance.collection('users');
+                    users.add({
+                      'full_name': variables['fullName'],
+                      'email': variables['email'],
+                      'phone_number': variables['phone_number']
+                    });
                     Navigator.of(context).pushReplacementNamed(homePageRoute);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {

@@ -10,7 +10,7 @@ class SchedulePage extends StatelessWidget {
     return const Scaffold(
       appBar: CustomAppBar(title: 'Schedules'),
       body: Column(children: <Widget>[Center(child: Text('coming soon'))]),
-      bottomNavigationBar: const CustomBottomAppbar(),
+      bottomNavigationBar: CustomBottomAppbar(),
     );
   }
 }

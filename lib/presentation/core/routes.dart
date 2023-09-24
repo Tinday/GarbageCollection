@@ -10,3 +10,6 @@ const String profilePageRoute = '/profilePageRoute';
 const String discoverRoute = '/discoverRoute';
 const String reportDumpingRoute = '/reportDumpingRoute';
 const String scheduleRoute = '/scheduleRoute';
+const String changePasswordRoute = '/changePasswordRoute';
+const String changeUserNameRoute = '/changeUserNameRoute';
+const String changeEmailRoute = '/changeEmailRoute';

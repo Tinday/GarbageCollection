@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:garbage_control/application/core/utils.dart';
 import 'package:garbage_control/constants/assets_strings.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
-import 'package:garbage_control/presentation/core/widgets/custom_appbar.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_bottom_app_bar.dart';
 import 'package:garbage_control/presentation/onboarding/widgets/home_page_card.dart';
 
@@ -47,7 +46,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 20),
           const Text(
             'What would you like to do today ?',
-            style: const TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18),
           ),
           const SizedBox(height: 20),
           Wrap(

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
@@ -65,4 +66,27 @@ String getGreetingMessage() {
     return 'Good Afternoon';
   }
   return 'Good Evening';
+}
+
+void changeUserPassword({
+  required String password,
+  required BuildContext context,
+}) async {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  User? currentUser = firebaseAuth.currentUser;
+  currentUser?.updatePassword(password).then(
+    (value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password changed successfully')),
+      );
+      Navigator.of(context).pop();
+    },
+  ).catchError((err) {
+    // An error has occurred.
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('An error occurred please log out and log back in'),
+      ),
+    );
+  });
 }
