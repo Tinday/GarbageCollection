@@ -98,7 +98,6 @@ class _LoginFormState extends State<LoginForm> {
                       email: email,
                       password: pass,
                     );
-                    Navigator.of(context).pushReplacementNamed(homePageRoute);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       ScaffoldMessenger.of(context).showSnackBar(
