@@ -30,7 +30,7 @@ class _ReportPageState extends State<ReportPage> {
     //   ),
     // );
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'Report Dumping',
       ),
       body: SafeArea(
@@ -40,7 +40,7 @@ class _ReportPageState extends State<ReportPage> {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   'Thank you for choosing to report littering within your area. The environment is a lot safer with responsible people like yourself. Please note that the report and anything you choose to share with us is confidential ',
                   style: TextStyle(fontSize: 16),
                   textAlign: TextAlign.center,
@@ -84,7 +84,8 @@ class _ReportPageState extends State<ReportPage> {
                 SizedBox(
                   height: 48,
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: () {}, child: Text('')),
+                  child:
+                      ElevatedButton(onPressed: () {}, child: const Text('')),
                 )
               ],
             ),

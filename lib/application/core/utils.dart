@@ -56,16 +56,15 @@ List<Widget> bottomAppBarItems({required BuildContext context}) => <Widget>[
       ),
     ];
 
-String getGreetingMessage() {
+String getGreetingMessage(String? name) {
   final int hour = DateTime.now().hour;
-  // final String name = firstName == null ? '' : ', $firstName';
   if (hour < 12) {
-    return 'Good Morning';
+    return 'Good Morning $name';
   }
   if (hour < 17) {
-    return 'Good Afternoon';
+    return 'Good Afternoon $name';
   }
-  return 'Good Evening';
+  return 'Good Evening $name';
 }
 
 void changeUserPassword({

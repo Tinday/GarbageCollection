@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
@@ -18,54 +19,60 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget appbarIcon = TextButton(
-      onPressed: () async {
-        if (formKey.currentState!.validate()) {
-          formKey.currentState!.save();
-          formKey.currentState!.reset();
-        }
-      },
-      child: const Text(
-        update,
-        style: TextStyle(color: whiteColor, fontSize: 16),
-      ),
-    );
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Change email',
-        trailingWidget: appbarIcon,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: ListView(
-          children: [
-            const SizedBox(height: 30),
-            TextFormField(
-              decoration: inputDecoration.copyWith(
-                hintText: currentEmail,
+      appBar: const CustomAppBar(title: 'Change email'),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      const Text('Please enter your new email address below'),
+                      const SizedBox(height: 30),
+                      TextFormField(
+                        decoration: inputDecoration.copyWith(
+                          hintText: newEmail,
+                        ),
+                        validator: (String? value) {
+                          username = value;
+                          return validateString(value);
+                        },
+                        onSaved: (String? newValue) {
+                          variables['current_password'] =
+                              newValue.toString().trim();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              validator: (String? value) {
-                username = value;
-                return validateString(value);
-              },
-              onSaved: (String? newValue) {
-                variables['current_password'] = newValue.toString().trim();
-              },
-            ),
-            const SizedBox(height: 30),
-            TextFormField(
-              decoration: inputDecoration.copyWith(
-                hintText: newEmail,
+              SizedBox(
+                height: 48,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      formKey.currentState!.reset();
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc('ABC123')
+                          .update({'company': 'Stokes and Sons'})
+                          .then((value) => print("User Updated"))
+                          .catchError(
+                            (error) => print("Failed to update user: $error"),
+                          );
+                    }
+                  },
+                  child: const Text('Update'),
+                ),
               ),
-              validator: (String? value) {
-                username = value;
-                return validateString(value);
-              },
-              onSaved: (String? newValue) {
-                variables['current_password'] = newValue.toString().trim();
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

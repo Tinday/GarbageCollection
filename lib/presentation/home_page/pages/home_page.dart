@@ -1,5 +1,8 @@
+import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/core/utils.dart';
+import 'package:garbage_control/application/redux/states/app_state.dart';
+import 'package:garbage_control/application/redux/view_models/user_state_view_model.dart';
 import 'package:garbage_control/constants/assets_strings.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_bottom_app_bar.dart';
@@ -20,7 +23,7 @@ class HomePage extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 colorFilter: ColorFilter.mode(
-                  Colors.red.withOpacity(1.0),
+                  Colors.red.withOpacity(1),
                   BlendMode.dstATop,
                 ),
                 image: const AssetImage(blendedBackgroundImg),
@@ -32,12 +35,22 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const SizedBox(height: 50),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text(
-                    getGreetingMessage(),
-                    style: const TextStyle(color: Colors.white, fontSize: 28),
-                  ),
+                StoreConnector<AppState, UserStateViewModel>(
+                  converter: (Store<AppState> store) =>
+                      UserStateViewModel.fromStore(store),
+                  builder: (BuildContext context, UserStateViewModel vm) {
+                    final String userName = vm.user?.fullName ?? '';
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        getGreetingMessage(userName),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 10),
               ],

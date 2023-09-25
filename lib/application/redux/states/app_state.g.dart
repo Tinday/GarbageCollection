@@ -7,6 +7,9 @@ part of 'app_state.dart';
 // **************************************************************************
 
 _$_AppState _$$_AppStateFromJson(Map<String, dynamic> json) => _$_AppState(
+      userState: json['userState'] == null
+          ? null
+          : UserState.fromJson(json['userState'] as Map<String, dynamic>),
       bottomNavigationState: json['bottomNavigationState'] == null
           ? null
           : BottomNavigationState.fromJson(
@@ -15,5 +18,6 @@ _$_AppState _$$_AppStateFromJson(Map<String, dynamic> json) => _$_AppState(
 
 Map<String, dynamic> _$$_AppStateToJson(_$_AppState instance) =>
     <String, dynamic>{
+      'userState': instance.userState,
       'bottomNavigationState': instance.bottomNavigationState,
     };

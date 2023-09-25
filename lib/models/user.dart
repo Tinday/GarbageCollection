@@ -1,27 +1,24 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-class User with _$User {
-  factory User({
-    @JsonKey(name: 'uid') String? uid,
-    @JsonKey(name: 'first_name') String? firstName,
-    @JsonKey(name: 'last_name') String? lastName,
+class UserModel with _$UserModel {
+  factory UserModel({
+    @JsonKey(name: 'full_name') String? fullName,
     @JsonKey(name: 'email') String? email,
     @JsonKey(name: 'phone_number') String? phoneNumber,
-    @JsonKey(name: 'role') String? role,
-  }) = _User;
+  }) = _UserModel;
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
-  factory User.initial() => User(
-        lastName: '',
-        uid: '',
-        firstName: '',
+  factory UserModel.initial() => UserModel(
+        fullName: '',
         email: '',
         phoneNumber: '',
-        role: '',
       );
 }
