@@ -1,9 +1,13 @@
+import 'package:async_redux/async_redux.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/core/utils.dart';
+import 'package:garbage_control/application/redux/actions/update_user_state_action.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
+import 'package:garbage_control/models/user.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
 
 class LoginForm extends StatefulWidget {
@@ -77,11 +81,21 @@ class _LoginFormState extends State<LoginForm> {
             height: 52,
             child: ElevatedButton(
               onLongPress: () async {
-                final UserCredential credential =
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
-                  email: 'byronkimani@gmail.com',
+                await FirebaseAuth.instance.signInWithEmailAndPassword(
+                  email: 'kimbyron20@gmail.com',
                   password: 'kimani',
                 );
+                FirebaseFirestore.instance
+                    .collection('users')
+                    .where('email', isEqualTo: variables['email'])
+                    .get()
+                    .then((QuerySnapshot<Map<String, dynamic>> value) {
+                  final user = UserModel.fromJson(value.docs.first.data());
+                  StoreProvider.dispatch(
+                    context,
+                    UpdateUserStateAction(userModel: user),
+                  );
+                });
                 Navigator.of(context).pushReplacementNamed(homePageRoute);
               },
               onPressed: () async {
@@ -93,11 +107,22 @@ class _LoginFormState extends State<LoginForm> {
                   final String pass = variables['password'];
 
                   try {
-                    final UserCredential credential =
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: email,
                       password: pass,
                     );
+
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .where('email', isEqualTo: variables['email'])
+                        .get()
+                        .then((QuerySnapshot<Map<String, dynamic>> value) {
+                      final user = UserModel.fromJson(value.docs.first.data());
+                      StoreProvider.dispatch(
+                        context,
+                        UpdateUserStateAction(userModel: user),
+                      );
+                    });
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
                       ScaffoldMessenger.of(context).showSnackBar(

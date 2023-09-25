@@ -1,10 +1,13 @@
+import 'package:async_redux/async_redux.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/core/utils.dart';
+import 'package:garbage_control/application/redux/actions/update_user_state_action.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
+import 'package:garbage_control/models/user.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
 
 class RegistrationForm extends StatefulWidget {
@@ -103,15 +106,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
                   displayLoadingDialog(context: context);
-                  final String email = variables['email'];
-                  final String pass = variables['password'];
+                  final String emailValue = variables['email'];
+                  final String passValue = variables['password'];
 
                   try {
-                    final UserCredential credential = await FirebaseAuth
-                        .instance
-                        .createUserWithEmailAndPassword(
-                      email: email,
-                      password: pass,
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      email: emailValue,
+                      password: passValue,
                     );
                     Navigator.of(context).pushReplacementNamed(homePageRoute);
                     CollectionReference users =
@@ -121,6 +122,16 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       'email': variables['email'],
                       'phone_number': variables['phone_number']
                     });
+                    StoreProvider.dispatch(
+                      context,
+                      UpdateUserStateAction(
+                        userModel: UserModel(
+                          email: variables['email'],
+                          phoneNumber: variables['phone_number'],
+                          fullName: variables['fullName'],
+                        ),
+                      ),
+                    );
                     Navigator.of(context).pushReplacementNamed(homePageRoute);
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
