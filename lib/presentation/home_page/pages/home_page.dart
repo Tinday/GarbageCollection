@@ -42,12 +42,25 @@ class HomePage extends StatelessWidget {
                     final String userName = vm.user?.fullName ?? '';
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        getGreetingMessage(userName),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            getGreetingMessage(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            userName,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },

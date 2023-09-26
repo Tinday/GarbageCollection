@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/constants/strings.dart';
+import 'package:garbage_control/models/tutorial.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_bottom_app_bar_item.dart';
 
@@ -56,15 +57,15 @@ List<Widget> bottomAppBarItems({required BuildContext context}) => <Widget>[
       ),
     ];
 
-String getGreetingMessage(String? name) {
+String getGreetingMessage() {
   final int hour = DateTime.now().hour;
   if (hour < 12) {
-    return 'Good Morning $name';
+    return 'Good Morning';
   }
   if (hour < 17) {
-    return 'Good Afternoon $name';
+    return 'Good Afternoon';
   }
-  return 'Good Evening $name';
+  return 'Good Evening';
 }
 
 void changeUserPassword({
@@ -89,3 +90,15 @@ void changeUserPassword({
     );
   });
 }
+
+String getThumbnailUrl(String videoUrl) {
+  return 'https://img.youtube.com/vi/$videoUrl/0.jpg';
+}
+
+List<Tutorial> litterTutorials = <Tutorial>[
+  Tutorial(id: 1, title: 'Reusing at home', youtubeId: '5xrWrKIVBgo'),
+  Tutorial(id: 2, title: 'Benefits of recycling', youtubeId: '8fnB0Bm4wys'),
+  Tutorial(id: 3, title: 'Recycling for kids', youtubeId: '6jQ7y_qQYUA'),
+  Tutorial(id: 4, title: 'What is waste management', youtubeId: 'K6ppCC3lboU'),
+  Tutorial(id: 5, title: 'Proper waste management', youtubeId: 'Qyu-fZ8BOnI'),
+];

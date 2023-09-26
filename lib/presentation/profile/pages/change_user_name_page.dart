@@ -1,4 +1,8 @@
+import 'package:async_redux/async_redux.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:garbage_control/application/redux/states/app_state.dart';
+import 'package:garbage_control/application/redux/view_models/user_state_view_model.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
@@ -18,53 +22,56 @@ class _ChangeUserNamePageState extends State<ChangeUserNamePage> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget appbarIcon = TextButton(
-      onPressed: () async {
-        if (formKey.currentState!.validate()) {
-          formKey.currentState!.save();
-          formKey.currentState!.reset();
-        }
-      },
-      child: const Text(
-        update,
-        style: TextStyle(color: whiteColor, fontSize: 16),
-      ),
-    );
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Change username',
-        trailingWidget: appbarIcon,
-      ),
+      appBar: const CustomAppBar(title: 'Change username'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: ListView(
+        child: Column(
           children: [
-            const SizedBox(height: 30),
-            TextFormField(
-              decoration: inputDecoration.copyWith(
-                hintText: currentUserName,
+            Expanded(
+              child: ListView(
+                children: [
+                  const SizedBox(height: 10),
+                  const Text('Please enter your preferred username below'),
+                  const SizedBox(height: 30),
+                  TextFormField(
+                    decoration: inputDecoration.copyWith(
+                      hintText: newUserName,
+                    ),
+                    validator: (String? value) {
+                      username = value;
+                      return validateString(value);
+                    },
+                    onSaved: (String? newValue) {
+                      variables['full_name'] = newValue.toString().trim();
+                    },
+                  ),
+                ],
               ),
-              validator: (String? value) {
-                username = value;
-                return validateString(value);
-              },
-              onSaved: (String? newValue) {
-                variables['current_name'] = newValue.toString().trim();
-              },
             ),
-            const SizedBox(height: 30),
-            TextFormField(
-              decoration: inputDecoration.copyWith(
-                hintText: newUserName,
-              ),
-              validator: (String? value) {
-                username = value;
-                return validateString(value);
+            StoreConnector<AppState, UserStateViewModel>(
+              builder: (BuildContext context, UserStateViewModel vm) {
+                final String? documentId = vm.documentId;
+                return SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        formKey.currentState!.reset();
+
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(documentId)
+                            .update({'full_name': variables['full_name']});
+                      }
+                    },
+                    child: const Text('Update'),
+                  ),
+                );
               },
-              onSaved: (String? newValue) {
-                variables['new_name'] = newValue.toString().trim();
-              },
-            ),
+            )
           ],
         ),
       ),

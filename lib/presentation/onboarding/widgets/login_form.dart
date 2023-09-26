@@ -85,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
                   email: 'kimbyron20@gmail.com',
                   password: 'kimani',
                 );
-                FirebaseFirestore.instance
+                await FirebaseFirestore.instance
                     .collection('users')
                     .where('email', isEqualTo: variables['email'])
                     .get()
@@ -93,7 +93,10 @@ class _LoginFormState extends State<LoginForm> {
                   final user = UserModel.fromJson(value.docs.first.data());
                   StoreProvider.dispatch(
                     context,
-                    UpdateUserStateAction(userModel: user),
+                    UpdateUserStateAction(
+                      userModel: user,
+                      documentId: value.docs.first.id,
+                    ),
                   );
                 });
                 Navigator.of(context).pushReplacementNamed(homePageRoute);

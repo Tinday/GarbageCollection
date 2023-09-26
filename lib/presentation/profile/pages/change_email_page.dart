@@ -1,5 +1,8 @@
+import 'package:async_redux/async_redux.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:garbage_control/application/redux/states/app_state.dart';
+import 'package:garbage_control/application/redux/view_models/user_state_view_model.dart';
 import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
@@ -42,34 +45,34 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
                           return validateString(value);
                         },
                         onSaved: (String? newValue) {
-                          variables['current_password'] =
-                              newValue.toString().trim();
+                          variables['email'] = newValue.toString().trim();
                         },
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: 48,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      formKey.currentState!.reset();
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc('ABC123')
-                          .update({'company': 'Stokes and Sons'})
-                          .then((value) => print("User Updated"))
-                          .catchError(
-                            (error) => print("Failed to update user: $error"),
-                          );
-                    }
-                  },
-                  child: const Text('Update'),
-                ),
+              StoreConnector<AppState, UserStateViewModel>(
+                builder: (BuildContext context, UserStateViewModel vm) {
+                  final String? documentId = vm.documentId;
+                  return SizedBox(
+                    height: 48,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          formKey.currentState!.reset();
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(documentId)
+                              .update({'email': variables['email']});
+                        }
+                      },
+                      child: const Text('Update'),
+                    ),
+                  );
+                },
               ),
             ],
           ),

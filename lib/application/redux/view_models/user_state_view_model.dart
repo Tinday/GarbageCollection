@@ -5,15 +5,18 @@ import 'package:garbage_control/models/user.dart';
 class UserStateViewModel extends Vm {
   UserStateViewModel({
     this.user,
+    this.documentId,
   }) : super(
-          equals: <Object?>[user],
+          equals: <Object?>[user, documentId],
         );
 
   factory UserStateViewModel.fromStore(Store<AppState> store) {
     return UserStateViewModel(
       user: store.state.userState?.user,
+      documentId: store.state.userState?.documentId,
     );
   }
 
   final UserModel? user;
+  final String? documentId;
 }
