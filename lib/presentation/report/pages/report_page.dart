@@ -1,5 +1,8 @@
+import 'package:async_redux/async_redux.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:garbage_control/constants/strings.dart';
+import 'package:garbage_control/application/redux/states/app_state.dart';
+import 'package:garbage_control/application/redux/view_models/user_state_view_model.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_appbar.dart';
@@ -15,80 +18,153 @@ class ReportPage extends StatefulWidget {
 class _ReportPageState extends State<ReportPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final Map<String, dynamic> variables = <String, dynamic>{};
+  bool isHouseWaste = false;
+  bool isConstructionWaste = false;
+  bool isIndustrialWaste = false;
+  bool isElectronicWaste = false;
+  bool isOtherWaste = false;
+
   @override
   Widget build(BuildContext context) {
-    // final Widget appbarIcon = TextButton(
-    //   onPressed: () async {
-    //     if (formKey.currentState!.validate()) {
-    //       formKey.currentState!.save();
-    //       formKey.currentState!.reset();
-    //     }
-    //   },
-    //   child: const Text(
-    //     update,
-    //     style: TextStyle(color: whiteColor, fontSize: 16),
-    //   ),
-    // );
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Report Dumping',
-      ),
+      appBar: const CustomAppBar(title: 'Report Dumping'),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              children: <Widget>[
-                const SizedBox(height: 20),
-                const Text(
-                  'Thank you for choosing to report littering within your area. The environment is a lot safer with responsible people like yourself. Please note that the report and anything you choose to share with us is confidential ',
-                  style: TextStyle(fontSize: 16),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  decoration: inputDecoration.copyWith(
-                    hintText: 'Brief description of the dumping',
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Form(
+                  key: formKey,
+                  child: ListView(
+                    children: <Widget>[
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Thank you for choosing to report littering within your area. Please note that the report and anything you choose to share with us is confidential ',
+                        style: TextStyle(fontSize: 15),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 40),
+                      const Text(
+                        'Where was the dumping done ?',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        decoration: inputDecoration.copyWith(
+                          hintText: 'Address of the area',
+                        ),
+                        validator: (String? value) {
+                          return validateString(value);
+                        },
+                        onSaved: (String? newValue) {
+                          variables['address_of_dumping'] =
+                              newValue.toString().trim();
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'How would you classify the type of dumping',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(height: 10),
+                      Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Checkbox(
+                                  value: isHouseWaste,
+                                  onChanged: (bool? val) {}),
+                              const Text('Household Waste')
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Checkbox(
+                                  value: isConstructionWaste,
+                                  onChanged: (bool? val) {}),
+                              const Text('Construction Debris')
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Checkbox(
+                                  value: isIndustrialWaste,
+                                  onChanged: (bool? val) {}),
+                              const Text('Industrial')
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Checkbox(
+                                  value: isElectronicWaste,
+                                  onChanged: (bool? val) {}),
+                              const Text('Electronics')
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Checkbox(
+                                  value: isOtherWaste,
+                                  onChanged: (bool? val) {}),
+                              const Text('Other')
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'If you chose other above please explain what type',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        decoration: inputDecoration.copyWith(
+                          hintText: 'Description of the dumping',
+                        ),
+                        onSaved: (String? newValue) {
+                          variables['other_description'] =
+                              newValue.toString().trim();
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
-                  validator: (String? value) {
-                    return validateString(value);
-                  },
-                  onSaved: (String? newValue) {
-                    variables['current_password'] = newValue.toString().trim();
+                ),
+              ),
+              SizedBox(
+                height: 48,
+                width: double.infinity,
+                child: StoreConnector<AppState, UserStateViewModel>(
+                  converter: (Store<AppState> store) =>
+                      UserStateViewModel.fromStore(store),
+                  builder: (BuildContext context, UserStateViewModel vm) {
+                    final String? documentId = vm.documentId;
+                    return ElevatedButton(
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          CollectionReference users =
+                              FirebaseFirestore.instance.collection('users');
+                          users.add({
+                            'reporter': documentId,
+                            'address_of_dumping':
+                                variables['address_of_dumping'],
+                            'isHouseWaste': isHouseWaste,
+                            'isConstructionWaste': isConstructionWaste,
+                            'isIndustrialWaste': isIndustrialWaste,
+                            'isElectronicWaste': isElectronicWaste,
+                            'isOtherWaste': isOtherWaste,
+                          });
+                        }
+                      },
+                      child: const Text('Submit report'),
+                    );
                   },
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  decoration: inputDecoration.copyWith(
-                    hintText: 'Brief description of the location',
-                  ),
-                  validator: (String? value) {
-                    return validateString(value);
-                  },
-                  onSaved: (String? newValue) {
-                    variables['current_password'] = newValue.toString().trim();
-                  },
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  decoration: inputDecoration.copyWith(
-                    hintText: 'Any other information you would like to add',
-                  ),
-                  validator: (String? value) {
-                    return validateString(value);
-                  },
-                  onSaved: (String? newValue) {
-                    variables['current_password'] = newValue.toString().trim();
-                  },
-                ),
-                SizedBox(
-                  height: 48,
-                  width: double.infinity,
-                  child:
-                      ElevatedButton(onPressed: () {}, child: const Text('')),
-                )
-              ],
-            ),
+              ),
+              const SizedBox(height: 20),
+            ],
           ),
         ),
       ),

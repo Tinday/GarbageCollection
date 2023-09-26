@@ -50,6 +50,8 @@ class _ChangeUserNamePageState extends State<ChangeUserNamePage> {
               ),
             ),
             StoreConnector<AppState, UserStateViewModel>(
+              converter: (Store<AppState> store) =>
+                  UserStateViewModel.fromStore(store),
               builder: (BuildContext context, UserStateViewModel vm) {
                 final String? documentId = vm.documentId;
                 return SizedBox(
