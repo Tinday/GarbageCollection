@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:garbage_control/models/tutorial.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
 import 'package:garbage_control/presentation/discover/pages/discover_page.dart';
+import 'package:garbage_control/presentation/discover/pages/video_player_page.dart';
 import 'package:garbage_control/presentation/onboarding/pages/create_account_page.dart';
 import 'package:garbage_control/presentation/home_page/pages/home_page.dart';
 import 'package:garbage_control/presentation/onboarding/pages/forgot_password_page.dart';
@@ -75,7 +77,6 @@ class AppRouter {
           builder: (_) => const ChangePasswordPage(),
           settings: const RouteSettings(name: changePasswordRoute),
         );
-      //changeEmailRoute
       case changeEmailRoute:
         return MaterialPageRoute<ChangeEmailPage>(
           builder: (_) => const ChangeEmailPage(),
@@ -86,6 +87,16 @@ class AppRouter {
         return MaterialPageRoute<ChangeUserNamePage>(
           builder: (_) => const ChangeUserNamePage(),
           settings: const RouteSettings(name: changeUserNameRoute),
+        );
+
+      case videoPlayerPageRoute:
+        final dynamic args = routeSettings?.arguments;
+
+        return MaterialPageRoute<VideoPlayerPage>(
+          builder: (_) => VideoPlayerPage(
+            tutorial: args as Tutorial,
+          ),
+          settings: const RouteSettings(name: videoPlayerPageRoute),
         );
       default:
         return MaterialPageRoute<WelcomePage>(
