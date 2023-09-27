@@ -87,7 +87,7 @@ class _LoginFormState extends State<LoginForm> {
                 );
                 await FirebaseFirestore.instance
                     .collection('users')
-                    .where('email', isEqualTo: variables['email'])
+                    .where('email', isEqualTo: 'kimbyron20@gmail.com')
                     .get()
                     .then((QuerySnapshot<Map<String, dynamic>> value) {
                   final user = UserModel.fromJson(value.docs.first.data());

@@ -14,6 +14,7 @@ import 'package:garbage_control/presentation/profile/pages/change_password_page.
 import 'package:garbage_control/presentation/profile/pages/change_user_name_page.dart';
 import 'package:garbage_control/presentation/profile/pages/profile_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_page.dart';
+import 'package:garbage_control/presentation/report/pages/reports_list_page.dart';
 
 class AppRouter {
   Route<dynamic> onGenerateRoute(RouteSettings? routeSettings) {
@@ -97,6 +98,12 @@ class AppRouter {
             tutorial: args as Tutorial,
           ),
           settings: const RouteSettings(name: videoPlayerPageRoute),
+        );
+
+      case reportsListRoute:
+        return MaterialPageRoute<ReportsListPage>(
+          builder: (_) => const ReportsListPage(),
+          settings: const RouteSettings(name: reportsListRoute),
         );
       default:
         return MaterialPageRoute<WelcomePage>(
