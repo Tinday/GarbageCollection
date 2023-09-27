@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
               HomePageCard(
                 iconUrl: reportListUrl,
                 title: 'View previous reports',
-                onTap: () => Navigator.of(context).pushNamed(scheduleRoute),
+                onTap: () => Navigator.of(context).pushNamed(reportsListRoute),
               )
             ],
           )
