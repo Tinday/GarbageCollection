@@ -13,6 +13,7 @@ import 'package:garbage_control/presentation/profile/pages/change_email_page.dar
 import 'package:garbage_control/presentation/profile/pages/change_password_page.dart';
 import 'package:garbage_control/presentation/profile/pages/change_user_name_page.dart';
 import 'package:garbage_control/presentation/profile/pages/profile_page.dart';
+import 'package:garbage_control/presentation/report/pages/report_detail_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_page.dart';
 import 'package:garbage_control/presentation/report/pages/reports_list_page.dart';
 
@@ -104,6 +105,13 @@ class AppRouter {
         return MaterialPageRoute<ReportsListPage>(
           builder: (_) => const ReportsListPage(),
           settings: const RouteSettings(name: reportsListRoute),
+        );
+      //
+
+      case reportDetailRoute:
+        return MaterialPageRoute<ReportDetailPage>(
+          builder: (_) => const ReportDetailPage(),
+          settings: const RouteSettings(name: reportDetailRoute),
         );
       default:
         return MaterialPageRoute<WelcomePage>(
