@@ -125,6 +125,7 @@ class _LoginFormState extends State<LoginForm> {
                         context,
                         UpdateUserStateAction(userModel: user),
                       );
+                      Navigator.of(context).pushReplacementNamed(homePageRoute);
                     });
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
