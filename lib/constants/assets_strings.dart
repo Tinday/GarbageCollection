@@ -4,3 +4,4 @@ const String reportCollectionImg = 'assets/images/report.svg';
 const String scheduleImage = 'assets/images/schedule.svg';
 const String avatarImage = 'assets/images/avatar.jpg';
 const String successImageUrl = 'assets/images/success.svg';
+const String reportListUrl = 'assets/images/report_list.svg';

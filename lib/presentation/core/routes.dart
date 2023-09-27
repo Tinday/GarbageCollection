@@ -14,3 +14,4 @@ const String changePasswordRoute = '/changePasswordRoute';
 const String changeUserNameRoute = '/changeUserNameRoute';
 const String changeEmailRoute = '/changeEmailRoute';
 const String videoPlayerPageRoute = '/videoPlayerPageRoute';
+const String reportsListRoute = '/reportsListRoute';

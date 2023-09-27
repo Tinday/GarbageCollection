@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:garbage_control/application/core/utils.dart';
 import 'package:garbage_control/application/redux/states/app_state.dart';
 import 'package:garbage_control/application/redux/view_models/user_state_view_model.dart';
 import 'package:garbage_control/constants/theme.dart';
@@ -73,40 +74,65 @@ class _ReportPageState extends State<ReportPage> {
                           Row(
                             children: <Widget>[
                               Checkbox(
-                                  value: isHouseWaste,
-                                  onChanged: (bool? val) {}),
+                                value: isHouseWaste,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    isHouseWaste = !isHouseWaste;
+                                  });
+                                },
+                              ),
                               const Text('Household Waste')
                             ],
                           ),
                           Row(
                             children: <Widget>[
                               Checkbox(
-                                  value: isConstructionWaste,
-                                  onChanged: (bool? val) {}),
+                                value: isConstructionWaste,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    isConstructionWaste = !isConstructionWaste;
+                                  });
+                                },
+                              ),
                               const Text('Construction Debris')
                             ],
                           ),
                           Row(
                             children: <Widget>[
                               Checkbox(
-                                  value: isIndustrialWaste,
-                                  onChanged: (bool? val) {}),
+                                value: isIndustrialWaste,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    isIndustrialWaste = !isIndustrialWaste;
+                                  });
+                                },
+                              ),
                               const Text('Industrial')
                             ],
                           ),
                           Row(
                             children: <Widget>[
                               Checkbox(
-                                  value: isElectronicWaste,
-                                  onChanged: (bool? val) {}),
+                                value: isElectronicWaste,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    isElectronicWaste = !isElectronicWaste;
+                                  });
+                                },
+                              ),
                               const Text('Electronics')
                             ],
                           ),
                           Row(
                             children: <Widget>[
                               Checkbox(
-                                  value: isOtherWaste,
-                                  onChanged: (bool? val) {}),
+                                value: isOtherWaste,
+                                onChanged: (bool? val) {
+                                  setState(() {
+                                    isOtherWaste = !isOtherWaste;
+                                  });
+                                },
+                              ),
                               const Text('Other')
                             ],
                           ),
@@ -144,18 +170,55 @@ class _ReportPageState extends State<ReportPage> {
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
+                          displayLoadingDialog(context: context);
                           CollectionReference users =
-                              FirebaseFirestore.instance.collection('users');
-                          users.add({
-                            'reporter': documentId,
-                            'address_of_dumping':
-                                variables['address_of_dumping'],
-                            'isHouseWaste': isHouseWaste,
-                            'isConstructionWaste': isConstructionWaste,
-                            'isIndustrialWaste': isIndustrialWaste,
-                            'isElectronicWaste': isElectronicWaste,
-                            'isOtherWaste': isOtherWaste,
-                          });
+                              FirebaseFirestore.instance.collection('reports');
+                          users.add(
+                            {
+                              'reporter': documentId,
+                              'address_of_dumping':
+                                  variables['address_of_dumping'],
+                              'isHouseWaste': isHouseWaste,
+                              'isConstructionWaste': isConstructionWaste,
+                              'isIndustrialWaste': isIndustrialWaste,
+                              'isElectronicWaste': isElectronicWaste,
+                              'isOtherWaste': isOtherWaste,
+                            },
+                          );
+                          Navigator.of(context).pop();
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                child: SizedBox(
+                                  height: 160,
+                                  width: 160,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                            'Report submitted successfully'),
+                                        const SizedBox(height: 30),
+                                        SizedBox(
+                                          width: 100,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Ok'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                         }
                       },
                       child: const Text('Submit report'),
