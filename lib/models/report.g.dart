@@ -7,6 +7,7 @@ part of 'report.dart';
 // **************************************************************************
 
 _$_Report _$$_ReportFromJson(Map<String, dynamic> json) => _$_Report(
+      id: json['id'] as String?,
       reporter: json['reporter'] as String?,
       isHouseWaste: json['isHouseWaste'] as bool?,
       isConstructionWaste: json['isConstructionWaste'] as bool?,
@@ -17,6 +18,7 @@ _$_Report _$$_ReportFromJson(Map<String, dynamic> json) => _$_Report(
     );
 
 Map<String, dynamic> _$$_ReportToJson(_$_Report instance) => <String, dynamic>{
+      'id': instance.id,
       'reporter': instance.reporter,
       'isHouseWaste': instance.isHouseWaste,
       'isConstructionWaste': instance.isConstructionWaste,

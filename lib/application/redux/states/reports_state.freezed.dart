@@ -21,6 +21,8 @@ ReportsState _$ReportsStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ReportsState {
   List<Report?>? get reports => throw _privateConstructorUsedError;
+  Report? get selectedReport => throw _privateConstructorUsedError;
+  String? get documentId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,10 @@ abstract class $ReportsStateCopyWith<$Res> {
           ReportsState value, $Res Function(ReportsState) then) =
       _$ReportsStateCopyWithImpl<$Res, ReportsState>;
   @useResult
-  $Res call({List<Report?>? reports});
+  $Res call(
+      {List<Report?>? reports, Report? selectedReport, String? documentId});
+
+  $ReportCopyWith<$Res>? get selectedReport;
 }
 
 /// @nodoc
@@ -51,13 +56,35 @@ class _$ReportsStateCopyWithImpl<$Res, $Val extends ReportsState>
   @override
   $Res call({
     Object? reports = freezed,
+    Object? selectedReport = freezed,
+    Object? documentId = freezed,
   }) {
     return _then(_value.copyWith(
       reports: freezed == reports
           ? _value.reports
           : reports // ignore: cast_nullable_to_non_nullable
               as List<Report?>?,
+      selectedReport: freezed == selectedReport
+          ? _value.selectedReport
+          : selectedReport // ignore: cast_nullable_to_non_nullable
+              as Report?,
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReportCopyWith<$Res>? get selectedReport {
+    if (_value.selectedReport == null) {
+      return null;
+    }
+
+    return $ReportCopyWith<$Res>(_value.selectedReport!, (value) {
+      return _then(_value.copyWith(selectedReport: value) as $Val);
+    });
   }
 }
 
@@ -69,7 +96,11 @@ abstract class _$$_ReportsStateCopyWith<$Res>
       __$$_ReportsStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Report?>? reports});
+  $Res call(
+      {List<Report?>? reports, Report? selectedReport, String? documentId});
+
+  @override
+  $ReportCopyWith<$Res>? get selectedReport;
 }
 
 /// @nodoc
@@ -84,12 +115,22 @@ class __$$_ReportsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? reports = freezed,
+    Object? selectedReport = freezed,
+    Object? documentId = freezed,
   }) {
     return _then(_$_ReportsState(
       reports: freezed == reports
           ? _value._reports
           : reports // ignore: cast_nullable_to_non_nullable
               as List<Report?>?,
+      selectedReport: freezed == selectedReport
+          ? _value.selectedReport
+          : selectedReport // ignore: cast_nullable_to_non_nullable
+              as Report?,
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -97,7 +138,9 @@ class __$$_ReportsStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ReportsState implements _ReportsState {
-  _$_ReportsState({final List<Report?>? reports}) : _reports = reports;
+  _$_ReportsState(
+      {final List<Report?>? reports, this.selectedReport, this.documentId})
+      : _reports = reports;
 
   factory _$_ReportsState.fromJson(Map<String, dynamic> json) =>
       _$$_ReportsStateFromJson(json);
@@ -113,8 +156,13 @@ class _$_ReportsState implements _ReportsState {
   }
 
   @override
+  final Report? selectedReport;
+  @override
+  final String? documentId;
+
+  @override
   String toString() {
-    return 'ReportsState(reports: $reports)';
+    return 'ReportsState(reports: $reports, selectedReport: $selectedReport, documentId: $documentId)';
   }
 
   @override
@@ -122,13 +170,20 @@ class _$_ReportsState implements _ReportsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReportsState &&
-            const DeepCollectionEquality().equals(other._reports, _reports));
+            const DeepCollectionEquality().equals(other._reports, _reports) &&
+            (identical(other.selectedReport, selectedReport) ||
+                other.selectedReport == selectedReport) &&
+            (identical(other.documentId, documentId) ||
+                other.documentId == documentId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_reports));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_reports),
+      selectedReport,
+      documentId);
 
   @JsonKey(ignore: true)
   @override
@@ -145,13 +200,20 @@ class _$_ReportsState implements _ReportsState {
 }
 
 abstract class _ReportsState implements ReportsState {
-  factory _ReportsState({final List<Report?>? reports}) = _$_ReportsState;
+  factory _ReportsState(
+      {final List<Report?>? reports,
+      final Report? selectedReport,
+      final String? documentId}) = _$_ReportsState;
 
   factory _ReportsState.fromJson(Map<String, dynamic> json) =
       _$_ReportsState.fromJson;
 
   @override
   List<Report?>? get reports;
+  @override
+  Report? get selectedReport;
+  @override
+  String? get documentId;
   @override
   @JsonKey(ignore: true)
   _$$_ReportsStateCopyWith<_$_ReportsState> get copyWith =>

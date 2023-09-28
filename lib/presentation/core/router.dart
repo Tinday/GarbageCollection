@@ -13,9 +13,11 @@ import 'package:garbage_control/presentation/profile/pages/change_email_page.dar
 import 'package:garbage_control/presentation/profile/pages/change_password_page.dart';
 import 'package:garbage_control/presentation/profile/pages/change_user_name_page.dart';
 import 'package:garbage_control/presentation/profile/pages/profile_page.dart';
+import 'package:garbage_control/presentation/report/pages/edit_report_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_detail_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_page.dart';
 import 'package:garbage_control/presentation/report/pages/reports_list_page.dart';
+import 'package:garbage_control/presentation/schedule/pages/schedule_page.dart';
 
 class AppRouter {
   Route<dynamic> onGenerateRoute(RouteSettings? routeSettings) {
@@ -57,8 +59,8 @@ class AppRouter {
           settings: const RouteSettings(name: reportDumpingRoute),
         );
       case scheduleRoute:
-        return MaterialPageRoute<ReportPage>(
-          builder: (_) => const ReportPage(),
+        return MaterialPageRoute<SchedulePage>(
+          builder: (_) => const SchedulePage(),
           settings: const RouteSettings(name: scheduleRoute),
         );
 
@@ -106,13 +108,21 @@ class AppRouter {
           builder: (_) => const ReportsListPage(),
           settings: const RouteSettings(name: reportsListRoute),
         );
-      //
 
       case reportDetailRoute:
         return MaterialPageRoute<ReportDetailPage>(
           builder: (_) => const ReportDetailPage(),
           settings: const RouteSettings(name: reportDetailRoute),
         );
+
+      case editReportRoute:
+        final dynamic args = routeSettings?.arguments;
+
+        return MaterialPageRoute<EditReportPage>(
+          builder: (_) => EditReportPage(report: args),
+          settings: const RouteSettings(name: editReportRoute),
+        );
+
       default:
         return MaterialPageRoute<WelcomePage>(
           builder: (_) => const WelcomePage(),

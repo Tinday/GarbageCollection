@@ -8,6 +8,7 @@ part 'report.g.dart';
 @freezed
 class Report with _$Report {
   factory Report({
+    @JsonKey(name: 'id') String? id,
     @JsonKey(name: 'reporter') String? reporter,
     @JsonKey(name: 'isHouseWaste') bool? isHouseWaste,
     @JsonKey(name: 'isConstructionWaste') bool? isConstructionWaste,
