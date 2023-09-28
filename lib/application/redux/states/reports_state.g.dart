@@ -12,9 +12,15 @@ _$_ReportsState _$$_ReportsStateFromJson(Map<String, dynamic> json) =>
           ?.map((e) =>
               e == null ? null : Report.fromJson(e as Map<String, dynamic>))
           .toList(),
+      selectedReport: json['selectedReport'] == null
+          ? null
+          : Report.fromJson(json['selectedReport'] as Map<String, dynamic>),
+      documentId: json['documentId'] as String?,
     );
 
 Map<String, dynamic> _$$_ReportsStateToJson(_$_ReportsState instance) =>
     <String, dynamic>{
       'reports': instance.reports,
+      'selectedReport': instance.selectedReport,
+      'documentId': instance.documentId,
     };

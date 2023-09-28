@@ -1,6 +1,8 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/redux/actions/fetch_reports_action.dart';
+import 'package:garbage_control/application/redux/actions/update_report_state_action.dart';
+import 'package:garbage_control/application/redux/flags/app_flags.dart';
 import 'package:garbage_control/application/redux/states/app_state.dart';
 import 'package:garbage_control/application/redux/view_models/reports_view_model.dart';
 import 'package:garbage_control/constants/theme.dart';
@@ -39,11 +41,13 @@ class _ReportsListPageState extends State<ReportsListPage> {
                     ),
                   );
                 },
-                context: context,
               ),
             );
           },
           builder: (BuildContext context, ReportsViewModel vm) {
+            if (vm.wait!.isWaitingFor(fetchReportsFlag)) {
+              return const Center(child: CircularProgressIndicator());
+            }
             if (vm.reports?.isNotEmpty ?? false) {
               return Column(
                 children: [
@@ -63,6 +67,12 @@ class _ReportsListPageState extends State<ReportsListPage> {
                         return GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
+                            StoreProvider.dispatch(
+                              context,
+                              UpdateReportStateAction(
+                                selectedReport: vm.reports?[index],
+                              ),
+                            );
                             Navigator.of(context).pushNamed(reportDetailRoute);
                           },
                           child: Container(
@@ -101,7 +111,7 @@ class _ReportsListPageState extends State<ReportsListPage> {
                 ],
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text('You have not filed any reports so far'),
               );
             }

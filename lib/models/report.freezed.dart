@@ -20,6 +20,8 @@ Report _$ReportFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Report {
+  @JsonKey(name: 'id')
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'reporter')
   String? get reporter => throw _privateConstructorUsedError;
   @JsonKey(name: 'isHouseWaste')
@@ -46,7 +48,8 @@ abstract class $ReportCopyWith<$Res> {
       _$ReportCopyWithImpl<$Res, Report>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'reporter') String? reporter,
+      {@JsonKey(name: 'id') String? id,
+      @JsonKey(name: 'reporter') String? reporter,
       @JsonKey(name: 'isHouseWaste') bool? isHouseWaste,
       @JsonKey(name: 'isConstructionWaste') bool? isConstructionWaste,
       @JsonKey(name: 'isIndustrialWaste') bool? isIndustrialWaste,
@@ -68,6 +71,7 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? reporter = freezed,
     Object? isHouseWaste = freezed,
     Object? isConstructionWaste = freezed,
@@ -77,6 +81,10 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
     Object? addressOfDumping = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       reporter: freezed == reporter
           ? _value.reporter
           : reporter // ignore: cast_nullable_to_non_nullable
@@ -116,7 +124,8 @@ abstract class _$$_ReportCopyWith<$Res> implements $ReportCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'reporter') String? reporter,
+      {@JsonKey(name: 'id') String? id,
+      @JsonKey(name: 'reporter') String? reporter,
       @JsonKey(name: 'isHouseWaste') bool? isHouseWaste,
       @JsonKey(name: 'isConstructionWaste') bool? isConstructionWaste,
       @JsonKey(name: 'isIndustrialWaste') bool? isIndustrialWaste,
@@ -135,6 +144,7 @@ class __$$_ReportCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? reporter = freezed,
     Object? isHouseWaste = freezed,
     Object? isConstructionWaste = freezed,
@@ -144,6 +154,10 @@ class __$$_ReportCopyWithImpl<$Res>
     Object? addressOfDumping = freezed,
   }) {
     return _then(_$_Report(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       reporter: freezed == reporter
           ? _value.reporter
           : reporter // ignore: cast_nullable_to_non_nullable
@@ -180,7 +194,8 @@ class __$$_ReportCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Report implements _Report {
   _$_Report(
-      {@JsonKey(name: 'reporter') this.reporter,
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'reporter') this.reporter,
       @JsonKey(name: 'isHouseWaste') this.isHouseWaste,
       @JsonKey(name: 'isConstructionWaste') this.isConstructionWaste,
       @JsonKey(name: 'isIndustrialWaste') this.isIndustrialWaste,
@@ -191,6 +206,9 @@ class _$_Report implements _Report {
   factory _$_Report.fromJson(Map<String, dynamic> json) =>
       _$$_ReportFromJson(json);
 
+  @override
+  @JsonKey(name: 'id')
+  final String? id;
   @override
   @JsonKey(name: 'reporter')
   final String? reporter;
@@ -215,7 +233,7 @@ class _$_Report implements _Report {
 
   @override
   String toString() {
-    return 'Report(reporter: $reporter, isHouseWaste: $isHouseWaste, isConstructionWaste: $isConstructionWaste, isIndustrialWaste: $isIndustrialWaste, isElectronicWaste: $isElectronicWaste, isOtherWaste: $isOtherWaste, addressOfDumping: $addressOfDumping)';
+    return 'Report(id: $id, reporter: $reporter, isHouseWaste: $isHouseWaste, isConstructionWaste: $isConstructionWaste, isIndustrialWaste: $isIndustrialWaste, isElectronicWaste: $isElectronicWaste, isOtherWaste: $isOtherWaste, addressOfDumping: $addressOfDumping)';
   }
 
   @override
@@ -223,6 +241,7 @@ class _$_Report implements _Report {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Report &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.reporter, reporter) ||
                 other.reporter == reporter) &&
             (identical(other.isHouseWaste, isHouseWaste) ||
@@ -243,6 +262,7 @@ class _$_Report implements _Report {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       reporter,
       isHouseWaste,
       isConstructionWaste,
@@ -267,7 +287,8 @@ class _$_Report implements _Report {
 
 abstract class _Report implements Report {
   factory _Report(
-      {@JsonKey(name: 'reporter') final String? reporter,
+      {@JsonKey(name: 'id') final String? id,
+      @JsonKey(name: 'reporter') final String? reporter,
       @JsonKey(name: 'isHouseWaste') final bool? isHouseWaste,
       @JsonKey(name: 'isConstructionWaste') final bool? isConstructionWaste,
       @JsonKey(name: 'isIndustrialWaste') final bool? isIndustrialWaste,
@@ -278,6 +299,9 @@ abstract class _Report implements Report {
 
   factory _Report.fromJson(Map<String, dynamic> json) = _$_Report.fromJson;
 
+  @override
+  @JsonKey(name: 'id')
+  String? get id;
   @override
   @JsonKey(name: 'reporter')
   String? get reporter;

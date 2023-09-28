@@ -16,3 +16,4 @@ const String changeEmailRoute = '/changeEmailRoute';
 const String videoPlayerPageRoute = '/videoPlayerPageRoute';
 const String reportsListRoute = '/reportsListRoute';
 const String reportDetailRoute = '/reportDetailRoute';
+const String editReportRoute = '/editReportRoute';

@@ -57,3 +57,5 @@ const String resetEmailSent = 'Reset Email Sent';
 const String resetEmailDescription =
     'An email has been sent to your account with instructions on how to reset your password. It will expire after 24 hours.';
 const String done = 'Done';
+const String deleteAccountDescription =
+    'This action can not be reversed once done. Do you want to edit the report instead ?';
