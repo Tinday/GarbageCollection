@@ -3,6 +3,8 @@ import 'package:garbage_control/models/tutorial.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
 import 'package:garbage_control/presentation/discover/pages/discover_page.dart';
 import 'package:garbage_control/presentation/discover/pages/video_player_page.dart';
+import 'package:garbage_control/presentation/home_page/pages/admin_home_page.dart';
+import 'package:garbage_control/presentation/onboarding/pages/admin_login_page.dart';
 import 'package:garbage_control/presentation/onboarding/pages/create_account_page.dart';
 import 'package:garbage_control/presentation/home_page/pages/home_page.dart';
 import 'package:garbage_control/presentation/onboarding/pages/forgot_password_page.dart';
@@ -13,6 +15,7 @@ import 'package:garbage_control/presentation/profile/pages/change_email_page.dar
 import 'package:garbage_control/presentation/profile/pages/change_password_page.dart';
 import 'package:garbage_control/presentation/profile/pages/change_user_name_page.dart';
 import 'package:garbage_control/presentation/profile/pages/profile_page.dart';
+import 'package:garbage_control/presentation/report/pages/admin_reports_list_page.dart';
 import 'package:garbage_control/presentation/report/pages/edit_report_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_detail_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_page.dart';
@@ -121,6 +124,24 @@ class AppRouter {
         return MaterialPageRoute<EditReportPage>(
           builder: (_) => EditReportPage(report: args),
           settings: const RouteSettings(name: editReportRoute),
+        );
+
+      case adminLoginRoute:
+        return MaterialPageRoute<AdminLoginPage>(
+          builder: (_) => const AdminLoginPage(),
+          settings: const RouteSettings(name: adminLoginRoute),
+        );
+
+      case adminHomePageRoute:
+        return MaterialPageRoute<AdminHomePage>(
+          builder: (_) => const AdminHomePage(),
+          settings: const RouteSettings(name: adminHomePageRoute),
+        );
+
+      case adminReportsPageRoute:
+        return MaterialPageRoute<AdminReportsListPage>(
+          builder: (_) => const AdminReportsListPage(),
+          settings: const RouteSettings(name: adminReportsPageRoute),
         );
 
       default:

@@ -17,3 +17,6 @@ const String videoPlayerPageRoute = '/videoPlayerPageRoute';
 const String reportsListRoute = '/reportsListRoute';
 const String reportDetailRoute = '/reportDetailRoute';
 const String editReportRoute = '/editReportRoute';
+const String adminLoginRoute = '/adminLoginRoute';
+const String adminHomePageRoute = '/adminHomePageRoute';
+const String adminReportsPageRoute = '/adminReportsPageRoute';

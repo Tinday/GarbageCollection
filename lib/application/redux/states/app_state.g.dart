@@ -17,6 +17,9 @@ _$_AppState _$$_AppStateFromJson(Map<String, dynamic> json) => _$_AppState(
       reportsState: json['reportsState'] == null
           ? null
           : ReportsState.fromJson(json['reportsState'] as Map<String, dynamic>),
+      adminState: json['adminState'] == null
+          ? null
+          : AdminState.fromJson(json['adminState'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_AppStateToJson(_$_AppState instance) =>
@@ -24,4 +27,5 @@ Map<String, dynamic> _$$_AppStateToJson(_$_AppState instance) =>
       'userState': instance.userState,
       'bottomNavigationState': instance.bottomNavigationState,
       'reportsState': instance.reportsState,
+      'adminState': instance.adminState,
     };

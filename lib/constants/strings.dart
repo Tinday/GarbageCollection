@@ -5,6 +5,7 @@ const String createAccount = 'Create account';
 const String termsAndConditions = 'Terms & conditions';
 const String iAgree = 'I AGREE';
 const String loginToYourAcc = 'Log in to your account';
+const String adminLogin = 'Admin Login';
 const String email = 'Email';
 const String password = 'Password';
 const String show = 'Show';

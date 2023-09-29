@@ -2,6 +2,7 @@
 
 import 'package:async_redux/async_redux.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:garbage_control/application/redux/states/admin_state.dart';
 import 'package:garbage_control/application/redux/states/bottom_navigation_state.dart';
 import 'package:garbage_control/application/redux/states/reports_state.dart';
 import 'package:garbage_control/application/redux/states/user_state.dart';
@@ -17,6 +18,7 @@ class AppState with _$AppState {
     UserState? userState,
     BottomNavigationState? bottomNavigationState,
     ReportsState? reportsState,
+    AdminState? adminState,
     @JsonKey(includeFromJson: false, includeToJson: false) Wait? wait,
   }) = _AppState;
 
@@ -27,6 +29,7 @@ class AppState with _$AppState {
         userState: UserState.initial(),
         bottomNavigationState: BottomNavigationState.initial(),
         reportsState: ReportsState.initial(),
+        adminState: AdminState.initial(),
         wait: Wait(),
       );
 }
