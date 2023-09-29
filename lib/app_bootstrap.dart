@@ -1,5 +1,4 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:garbage_control/app_widget.dart';
@@ -22,7 +21,6 @@ Future<void> appBootStrap() async {
 
   final NavigatorObserver navigatorObserver = NavigatorObserver();
   NavigateAction.setNavigatorKey(appGlobalNavigatorKey);
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   runApp(
     AppWidget(

@@ -24,6 +24,7 @@ mixin _$AppState {
   BottomNavigationState? get bottomNavigationState =>
       throw _privateConstructorUsedError;
   ReportsState? get reportsState => throw _privateConstructorUsedError;
+  AdminState? get adminState => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   Wait? get wait => throw _privateConstructorUsedError;
 
@@ -42,11 +43,13 @@ abstract class $AppStateCopyWith<$Res> {
       {UserState? userState,
       BottomNavigationState? bottomNavigationState,
       ReportsState? reportsState,
+      AdminState? adminState,
       @JsonKey(includeFromJson: false, includeToJson: false) Wait? wait});
 
   $UserStateCopyWith<$Res>? get userState;
   $BottomNavigationStateCopyWith<$Res>? get bottomNavigationState;
   $ReportsStateCopyWith<$Res>? get reportsState;
+  $AdminStateCopyWith<$Res>? get adminState;
 }
 
 /// @nodoc
@@ -65,6 +68,7 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
     Object? userState = freezed,
     Object? bottomNavigationState = freezed,
     Object? reportsState = freezed,
+    Object? adminState = freezed,
     Object? wait = freezed,
   }) {
     return _then(_value.copyWith(
@@ -80,6 +84,10 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
           ? _value.reportsState
           : reportsState // ignore: cast_nullable_to_non_nullable
               as ReportsState?,
+      adminState: freezed == adminState
+          ? _value.adminState
+          : adminState // ignore: cast_nullable_to_non_nullable
+              as AdminState?,
       wait: freezed == wait
           ? _value.wait
           : wait // ignore: cast_nullable_to_non_nullable
@@ -123,6 +131,18 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
       return _then(_value.copyWith(reportsState: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AdminStateCopyWith<$Res>? get adminState {
+    if (_value.adminState == null) {
+      return null;
+    }
+
+    return $AdminStateCopyWith<$Res>(_value.adminState!, (value) {
+      return _then(_value.copyWith(adminState: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -136,6 +156,7 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       {UserState? userState,
       BottomNavigationState? bottomNavigationState,
       ReportsState? reportsState,
+      AdminState? adminState,
       @JsonKey(includeFromJson: false, includeToJson: false) Wait? wait});
 
   @override
@@ -144,6 +165,8 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   $BottomNavigationStateCopyWith<$Res>? get bottomNavigationState;
   @override
   $ReportsStateCopyWith<$Res>? get reportsState;
+  @override
+  $AdminStateCopyWith<$Res>? get adminState;
 }
 
 /// @nodoc
@@ -160,6 +183,7 @@ class __$$_AppStateCopyWithImpl<$Res>
     Object? userState = freezed,
     Object? bottomNavigationState = freezed,
     Object? reportsState = freezed,
+    Object? adminState = freezed,
     Object? wait = freezed,
   }) {
     return _then(_$_AppState(
@@ -175,6 +199,10 @@ class __$$_AppStateCopyWithImpl<$Res>
           ? _value.reportsState
           : reportsState // ignore: cast_nullable_to_non_nullable
               as ReportsState?,
+      adminState: freezed == adminState
+          ? _value.adminState
+          : adminState // ignore: cast_nullable_to_non_nullable
+              as AdminState?,
       wait: freezed == wait
           ? _value.wait
           : wait // ignore: cast_nullable_to_non_nullable
@@ -190,6 +218,7 @@ class _$_AppState implements _AppState {
       {this.userState,
       this.bottomNavigationState,
       this.reportsState,
+      this.adminState,
       @JsonKey(includeFromJson: false, includeToJson: false) this.wait});
 
   factory _$_AppState.fromJson(Map<String, dynamic> json) =>
@@ -202,12 +231,14 @@ class _$_AppState implements _AppState {
   @override
   final ReportsState? reportsState;
   @override
+  final AdminState? adminState;
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final Wait? wait;
 
   @override
   String toString() {
-    return 'AppState(userState: $userState, bottomNavigationState: $bottomNavigationState, reportsState: $reportsState, wait: $wait)';
+    return 'AppState(userState: $userState, bottomNavigationState: $bottomNavigationState, reportsState: $reportsState, adminState: $adminState, wait: $wait)';
   }
 
   @override
@@ -221,13 +252,15 @@ class _$_AppState implements _AppState {
                 other.bottomNavigationState == bottomNavigationState) &&
             (identical(other.reportsState, reportsState) ||
                 other.reportsState == reportsState) &&
+            (identical(other.adminState, adminState) ||
+                other.adminState == adminState) &&
             (identical(other.wait, wait) || other.wait == wait));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userState, bottomNavigationState, reportsState, wait);
+  int get hashCode => Object.hash(runtimeType, userState, bottomNavigationState,
+      reportsState, adminState, wait);
 
   @JsonKey(ignore: true)
   @override
@@ -248,6 +281,7 @@ abstract class _AppState implements AppState {
       {final UserState? userState,
       final BottomNavigationState? bottomNavigationState,
       final ReportsState? reportsState,
+      final AdminState? adminState,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final Wait? wait}) = _$_AppState;
 
@@ -259,6 +293,8 @@ abstract class _AppState implements AppState {
   BottomNavigationState? get bottomNavigationState;
   @override
   ReportsState? get reportsState;
+  @override
+  AdminState? get adminState;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Wait? get wait;

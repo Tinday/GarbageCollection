@@ -66,6 +66,16 @@ class WelcomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(adminLoginRoute);
+                    },
+                    child: const Text(
+                      'Admin sign In',
+                      style: TextStyle(color: accentColor),
+                    ),
+                  )
                 ],
               ),
             )
