@@ -4,7 +4,6 @@ import 'package:garbage_control/constants/strings.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_appbar.dart';
-import 'package:garbage_control/presentation/core/widgets/custom_bottom_app_bar.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
@@ -132,7 +131,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               )),
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppbar(),
+      // bottomNavigationBar: const CustomBottomAppbar(isAdmin: false),
     );
   }
 }

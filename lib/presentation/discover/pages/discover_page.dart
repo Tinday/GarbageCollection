@@ -33,7 +33,7 @@ class DiscoverPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppbar(),
+      bottomNavigationBar: const CustomBottomAppbar(isAdmin: false),
     );
   }
 }

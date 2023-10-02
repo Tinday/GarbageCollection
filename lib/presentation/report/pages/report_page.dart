@@ -7,7 +7,6 @@ import 'package:garbage_control/application/redux/view_models/user_state_view_mo
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_appbar.dart';
-import 'package:garbage_control/presentation/core/widgets/custom_bottom_app_bar.dart';
 
 class ReportPage extends StatefulWidget {
   const ReportPage({Key? key}) : super(key: key);
@@ -171,9 +170,8 @@ class _ReportPageState extends State<ReportPage> {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
                           displayLoadingDialog(context: context);
-                          CollectionReference users =
-                              FirebaseFirestore.instance.collection('reports');
-                          users.add(
+
+                          FirebaseFirestore.instance.collection('reports').add(
                             {
                               'reporter': documentId,
                               'address_of_dumping':
@@ -183,6 +181,7 @@ class _ReportPageState extends State<ReportPage> {
                               'isIndustrialWaste': isIndustrialWaste,
                               'isElectronicWaste': isElectronicWaste,
                               'isOtherWaste': isOtherWaste,
+                              'is_scheduled': false,
                             },
                           );
                           Navigator.of(context).pop();
@@ -231,7 +230,6 @@ class _ReportPageState extends State<ReportPage> {
           ),
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppbar(),
     );
   }
 }

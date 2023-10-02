@@ -8,7 +8,6 @@ import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/infrastructure/validators.dart';
 import 'package:garbage_control/models/report.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_appbar.dart';
-import 'package:garbage_control/presentation/core/widgets/custom_bottom_app_bar.dart';
 
 class EditReportPage extends StatefulWidget {
   const EditReportPage({
@@ -241,7 +240,6 @@ class _EditReportPageState extends State<EditReportPage> {
           ),
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppbar(),
     );
   }
 }

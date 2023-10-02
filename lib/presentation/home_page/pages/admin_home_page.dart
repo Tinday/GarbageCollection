@@ -87,7 +87,7 @@ class AdminHomePage extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: const CustomBottomAppbar(),
+      bottomNavigationBar: const CustomBottomAppbar(isAdmin: true),
     );
   }
 }

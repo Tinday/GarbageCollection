@@ -1,20 +1,20 @@
 import 'package:async_redux/async_redux.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_control/application/redux/states/app_state.dart';
 import 'package:garbage_control/application/redux/view_models/reports_view_model.dart';
 import 'package:garbage_control/constants/theme.dart';
 import 'package:garbage_control/models/report.dart';
-import 'package:garbage_control/presentation/core/routes.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_appbar.dart';
-import 'package:garbage_control/presentation/report/widgets/delete_report_dialog.dart';
+import 'package:intl/intl.dart';
 
-class ReportDetailPage extends StatelessWidget {
-  const ReportDetailPage({Key? key}) : super(key: key);
+class AdminReportDetailPage extends StatelessWidget {
+  const AdminReportDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Report Detail'),
+      appBar: const CustomAppBar(title: 'Admin Report Detail'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14),
         child: StoreConnector<AppState, ReportsViewModel>(
@@ -43,20 +43,6 @@ class ReportDetailPage extends StatelessWidget {
                               selectedReport?.addressOfDumping ?? '',
                               style: const TextStyle(fontSize: 15),
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        const Row(
-                          children: [
-                            Text(
-                              'Reporter: ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: accentColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text('You', style: TextStyle(fontSize: 15)),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -128,83 +114,49 @@ class ReportDetailPage extends StatelessWidget {
                                 style: const TextStyle(fontSize: 15)),
                           ],
                         ),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            const Text(
-                              'Scheduled date of collection: ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: accentColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              selectedReport?.dateOfCollection ?? '',
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
                 ),
-                if ((selectedReport?.isScheduled ?? false))
-                  const Column(
-                    children: [
-                      Text(
-                        'Please note you can not edit or delete a dumping that has already been scheduled',
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 20),
-                    ],
-                  ),
-                if (!(selectedReport?.isScheduled ?? false))
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: 48,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: accentColor,
-                            side: const BorderSide(
-                                color: accentColor, width: 1.5),
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100)),
+                SizedBox(
+                  height: 48,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final DateTime now = DateTime.now();
+                      final DateTime? selectedDate = await showDatePicker(
+                        context: context,
+                        initialDate: now,
+                        firstDate: now,
+                        lastDate: now.add(const Duration(days: 1000)),
+                      );
+                      if (selectedDate != null) {
+                        final String formattedDate =
+                            DateFormat('dd-MM-yyyy').format(selectedDate);
+                        await FirebaseFirestore.instance
+                            .collection('reports')
+                            .doc(selectedReport?.id)
+                            .update({
+                          'date_of_collection': formattedDate,
+                          'is_scheduled': true,
+                        });
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Collection date assigned'),
                           ),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return DeleteReportDialog(
-                                  report: selectedReport!,
-                                );
-                              },
-                            );
-                          },
-                          child: const Text('Delete dumping report'),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(
-                              editReportRoute,
-                              arguments: selectedReport,
-                            );
-                          },
-                          child: const Text('Edit report'),
-                        ),
-                      )
-                    ],
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please select a valid date'),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Assign collection date'),
                   ),
+                ),
                 const SizedBox(height: 20),
               ],
             );
