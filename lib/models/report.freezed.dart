@@ -36,6 +36,10 @@ mixin _$Report {
   bool? get isOtherWaste => throw _privateConstructorUsedError;
   @JsonKey(name: 'address_of_dumping')
   String? get addressOfDumping => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_scheduled')
+  bool? get isScheduled => throw _privateConstructorUsedError;
+  @JsonKey(name: 'date_of_collection')
+  String? get dateOfCollection => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +59,9 @@ abstract class $ReportCopyWith<$Res> {
       @JsonKey(name: 'isIndustrialWaste') bool? isIndustrialWaste,
       @JsonKey(name: 'isElectronicWaste') bool? isElectronicWaste,
       @JsonKey(name: 'isOtherWaste') bool? isOtherWaste,
-      @JsonKey(name: 'address_of_dumping') String? addressOfDumping});
+      @JsonKey(name: 'address_of_dumping') String? addressOfDumping,
+      @JsonKey(name: 'is_scheduled') bool? isScheduled,
+      @JsonKey(name: 'date_of_collection') String? dateOfCollection});
 }
 
 /// @nodoc
@@ -79,6 +85,8 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
     Object? isElectronicWaste = freezed,
     Object? isOtherWaste = freezed,
     Object? addressOfDumping = freezed,
+    Object? isScheduled = freezed,
+    Object? dateOfCollection = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -113,6 +121,14 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
           ? _value.addressOfDumping
           : addressOfDumping // ignore: cast_nullable_to_non_nullable
               as String?,
+      isScheduled: freezed == isScheduled
+          ? _value.isScheduled
+          : isScheduled // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      dateOfCollection: freezed == dateOfCollection
+          ? _value.dateOfCollection
+          : dateOfCollection // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -131,7 +147,9 @@ abstract class _$$_ReportCopyWith<$Res> implements $ReportCopyWith<$Res> {
       @JsonKey(name: 'isIndustrialWaste') bool? isIndustrialWaste,
       @JsonKey(name: 'isElectronicWaste') bool? isElectronicWaste,
       @JsonKey(name: 'isOtherWaste') bool? isOtherWaste,
-      @JsonKey(name: 'address_of_dumping') String? addressOfDumping});
+      @JsonKey(name: 'address_of_dumping') String? addressOfDumping,
+      @JsonKey(name: 'is_scheduled') bool? isScheduled,
+      @JsonKey(name: 'date_of_collection') String? dateOfCollection});
 }
 
 /// @nodoc
@@ -152,6 +170,8 @@ class __$$_ReportCopyWithImpl<$Res>
     Object? isElectronicWaste = freezed,
     Object? isOtherWaste = freezed,
     Object? addressOfDumping = freezed,
+    Object? isScheduled = freezed,
+    Object? dateOfCollection = freezed,
   }) {
     return _then(_$_Report(
       id: freezed == id
@@ -186,6 +206,14 @@ class __$$_ReportCopyWithImpl<$Res>
           ? _value.addressOfDumping
           : addressOfDumping // ignore: cast_nullable_to_non_nullable
               as String?,
+      isScheduled: freezed == isScheduled
+          ? _value.isScheduled
+          : isScheduled // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      dateOfCollection: freezed == dateOfCollection
+          ? _value.dateOfCollection
+          : dateOfCollection // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -201,7 +229,9 @@ class _$_Report implements _Report {
       @JsonKey(name: 'isIndustrialWaste') this.isIndustrialWaste,
       @JsonKey(name: 'isElectronicWaste') this.isElectronicWaste,
       @JsonKey(name: 'isOtherWaste') this.isOtherWaste,
-      @JsonKey(name: 'address_of_dumping') this.addressOfDumping});
+      @JsonKey(name: 'address_of_dumping') this.addressOfDumping,
+      @JsonKey(name: 'is_scheduled') this.isScheduled,
+      @JsonKey(name: 'date_of_collection') this.dateOfCollection});
 
   factory _$_Report.fromJson(Map<String, dynamic> json) =>
       _$$_ReportFromJson(json);
@@ -230,10 +260,16 @@ class _$_Report implements _Report {
   @override
   @JsonKey(name: 'address_of_dumping')
   final String? addressOfDumping;
+  @override
+  @JsonKey(name: 'is_scheduled')
+  final bool? isScheduled;
+  @override
+  @JsonKey(name: 'date_of_collection')
+  final String? dateOfCollection;
 
   @override
   String toString() {
-    return 'Report(id: $id, reporter: $reporter, isHouseWaste: $isHouseWaste, isConstructionWaste: $isConstructionWaste, isIndustrialWaste: $isIndustrialWaste, isElectronicWaste: $isElectronicWaste, isOtherWaste: $isOtherWaste, addressOfDumping: $addressOfDumping)';
+    return 'Report(id: $id, reporter: $reporter, isHouseWaste: $isHouseWaste, isConstructionWaste: $isConstructionWaste, isIndustrialWaste: $isIndustrialWaste, isElectronicWaste: $isElectronicWaste, isOtherWaste: $isOtherWaste, addressOfDumping: $addressOfDumping, isScheduled: $isScheduled, dateOfCollection: $dateOfCollection)';
   }
 
   @override
@@ -255,7 +291,11 @@ class _$_Report implements _Report {
             (identical(other.isOtherWaste, isOtherWaste) ||
                 other.isOtherWaste == isOtherWaste) &&
             (identical(other.addressOfDumping, addressOfDumping) ||
-                other.addressOfDumping == addressOfDumping));
+                other.addressOfDumping == addressOfDumping) &&
+            (identical(other.isScheduled, isScheduled) ||
+                other.isScheduled == isScheduled) &&
+            (identical(other.dateOfCollection, dateOfCollection) ||
+                other.dateOfCollection == dateOfCollection));
   }
 
   @JsonKey(ignore: true)
@@ -269,7 +309,9 @@ class _$_Report implements _Report {
       isIndustrialWaste,
       isElectronicWaste,
       isOtherWaste,
-      addressOfDumping);
+      addressOfDumping,
+      isScheduled,
+      dateOfCollection);
 
   @JsonKey(ignore: true)
   @override
@@ -294,8 +336,10 @@ abstract class _Report implements Report {
       @JsonKey(name: 'isIndustrialWaste') final bool? isIndustrialWaste,
       @JsonKey(name: 'isElectronicWaste') final bool? isElectronicWaste,
       @JsonKey(name: 'isOtherWaste') final bool? isOtherWaste,
-      @JsonKey(name: 'address_of_dumping')
-      final String? addressOfDumping}) = _$_Report;
+      @JsonKey(name: 'address_of_dumping') final String? addressOfDumping,
+      @JsonKey(name: 'is_scheduled') final bool? isScheduled,
+      @JsonKey(name: 'date_of_collection')
+      final String? dateOfCollection}) = _$_Report;
 
   factory _Report.fromJson(Map<String, dynamic> json) = _$_Report.fromJson;
 
@@ -323,6 +367,12 @@ abstract class _Report implements Report {
   @override
   @JsonKey(name: 'address_of_dumping')
   String? get addressOfDumping;
+  @override
+  @JsonKey(name: 'is_scheduled')
+  bool? get isScheduled;
+  @override
+  @JsonKey(name: 'date_of_collection')
+  String? get dateOfCollection;
   @override
   @JsonKey(ignore: true)
   _$$_ReportCopyWith<_$_Report> get copyWith =>

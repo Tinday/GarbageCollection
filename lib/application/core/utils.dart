@@ -33,21 +33,28 @@ void displayLoadingDialog({required BuildContext context}) {
   );
 }
 
-List<Widget> bottomAppBarItems({required BuildContext context}) => <Widget>[
+List<Widget> bottomAppBarItems({
+  required BuildContext context,
+  required bool isAdmin,
+}) =>
+    <Widget>[
       CustomBottomAppBarItem(
         iconData: Icons.home_outlined,
         title: 'Home',
         onPressed: (String p0) {
-          Navigator.of(context).pushNamed(homePageRoute);
+          isAdmin
+              ? Navigator.of(context).pushNamed(adminHomePageRoute)
+              : Navigator.of(context).pushNamed(homePageRoute);
         },
       ),
-      CustomBottomAppBarItem(
-        iconData: Icons.tune,
-        title: 'Discover',
-        onPressed: (String p0) {
-          Navigator.of(context).pushNamed(discoverRoute);
-        },
-      ),
+      if (!isAdmin)
+        CustomBottomAppBarItem(
+          iconData: Icons.tune,
+          title: 'Discover',
+          onPressed: (String p0) {
+            Navigator.of(context).pushNamed(discoverRoute);
+          },
+        ),
       CustomBottomAppBarItem(
         iconData: Icons.person,
         title: 'Profile',

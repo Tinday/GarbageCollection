@@ -16,6 +16,8 @@ class Report with _$Report {
     @JsonKey(name: 'isElectronicWaste') bool? isElectronicWaste,
     @JsonKey(name: 'isOtherWaste') bool? isOtherWaste,
     @JsonKey(name: 'address_of_dumping') String? addressOfDumping,
+    @JsonKey(name: 'is_scheduled') bool? isScheduled,
+    @JsonKey(name: 'date_of_collection') String? dateOfCollection,
   }) = _Report;
 
   factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);

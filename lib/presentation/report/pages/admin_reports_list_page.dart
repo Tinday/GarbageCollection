@@ -6,6 +6,7 @@ import 'package:garbage_control/application/redux/flags/app_flags.dart';
 import 'package:garbage_control/application/redux/states/app_state.dart';
 import 'package:garbage_control/application/redux/view_models/admin_state_view_model.dart';
 import 'package:garbage_control/constants/theme.dart';
+import 'package:garbage_control/models/report.dart';
 import 'package:garbage_control/presentation/core/routes.dart';
 import 'package:garbage_control/presentation/core/widgets/custom_appbar.dart';
 
@@ -45,7 +46,7 @@ class _AdminReportsListPageState extends State<AdminReportsListPage> {
             );
           },
           builder: (BuildContext context, AdminStateViewModel vm) {
-            if (vm.wait!.isWaitingFor(fetchReportsFlag)) {
+            if (vm.wait!.isWaitingFor(fetchAdminReportsFlag)) {
               return const Center(child: CircularProgressIndicator());
             }
             if (vm.reports?.isNotEmpty ?? false) {
@@ -64,16 +65,19 @@ class _AdminReportsListPageState extends State<AdminReportsListPage> {
                     child: ListView.builder(
                       itemCount: vm.reports?.length,
                       itemBuilder: (BuildContext context, int index) {
+                        final Report? selectedReport = vm.reports?[index];
                         return GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
                             StoreProvider.dispatch(
                               context,
                               UpdateReportStateAction(
-                                selectedReport: vm.reports?[index],
+                                selectedReport: selectedReport,
                               ),
                             );
-                            Navigator.of(context).pushNamed(reportDetailRoute);
+                            Navigator.of(context).pushNamed(
+                              adminReportDetailPageRoute,
+                            );
                           },
                           child: Container(
                             margin: const EdgeInsets.only(bottom: 12),
@@ -84,23 +88,55 @@ class _AdminReportsListPageState extends State<AdminReportsListPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Row(
                                   children: [
                                     const Text(
-                                      "Area of reporting/dumping: ",
+                                      "Area of dumping: ",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: accentColor),
                                     ),
-                                    Text(
-                                      vm.reports?[index]?.addressOfDumping ??
-                                          '',
+                                    Expanded(
+                                      child: Text(
+                                        selectedReport?.addressOfDumping ?? '',
+                                      ),
                                     ),
-                                    const Spacer(),
                                     const Icon(Icons.chevron_right)
                                   ],
                                 ),
+                                const SizedBox(height: 20),
+                                if (selectedReport?.isScheduled ?? false)
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: greenColor.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 14,
+                                    ),
+                                    child: const Text(
+                                      'Scheduled',
+                                      style: TextStyle(color: greenColor),
+                                    ),
+                                  )
+                                else
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: redChipColor.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 14,
+                                    ),
+                                    child: const Text(
+                                      'Not Scheduled',
+                                      style: TextStyle(color: redChipColor),
+                                    ),
+                                  )
                               ],
                             ),
                           ),

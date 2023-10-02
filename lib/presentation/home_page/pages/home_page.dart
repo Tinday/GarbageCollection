@@ -84,11 +84,6 @@ class HomePage extends StatelessWidget {
                     Navigator.of(context).pushNamed(reportDumpingRoute),
               ),
               HomePageCard(
-                iconUrl: scheduleImage,
-                title: 'Check collection schedule',
-                onTap: () => Navigator.of(context).pushNamed(scheduleRoute),
-              ),
-              HomePageCard(
                 iconUrl: reportListUrl,
                 title: 'View previous reports',
                 onTap: () => Navigator.of(context).pushNamed(reportsListRoute),
@@ -97,7 +92,7 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: const CustomBottomAppbar(),
+      bottomNavigationBar: const CustomBottomAppbar(isAdmin: true),
     );
   }
 }

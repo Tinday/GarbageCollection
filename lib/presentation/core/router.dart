@@ -15,12 +15,12 @@ import 'package:garbage_control/presentation/profile/pages/change_email_page.dar
 import 'package:garbage_control/presentation/profile/pages/change_password_page.dart';
 import 'package:garbage_control/presentation/profile/pages/change_user_name_page.dart';
 import 'package:garbage_control/presentation/profile/pages/profile_page.dart';
+import 'package:garbage_control/presentation/report/pages/admin_report_detail_page.dart';
 import 'package:garbage_control/presentation/report/pages/admin_reports_list_page.dart';
 import 'package:garbage_control/presentation/report/pages/edit_report_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_detail_page.dart';
 import 'package:garbage_control/presentation/report/pages/report_page.dart';
 import 'package:garbage_control/presentation/report/pages/reports_list_page.dart';
-import 'package:garbage_control/presentation/schedule/pages/schedule_page.dart';
 
 class AppRouter {
   Route<dynamic> onGenerateRoute(RouteSettings? routeSettings) {
@@ -60,11 +60,6 @@ class AppRouter {
         return MaterialPageRoute<ReportPage>(
           builder: (_) => const ReportPage(),
           settings: const RouteSettings(name: reportDumpingRoute),
-        );
-      case scheduleRoute:
-        return MaterialPageRoute<SchedulePage>(
-          builder: (_) => const SchedulePage(),
-          settings: const RouteSettings(name: scheduleRoute),
         );
 
       case forgotPasswordPageRoute:
@@ -142,6 +137,12 @@ class AppRouter {
         return MaterialPageRoute<AdminReportsListPage>(
           builder: (_) => const AdminReportsListPage(),
           settings: const RouteSettings(name: adminReportsPageRoute),
+        );
+
+      case adminReportDetailPageRoute:
+        return MaterialPageRoute<AdminReportDetailPage>(
+          builder: (_) => const AdminReportDetailPage(),
+          settings: const RouteSettings(name: adminReportDetailPageRoute),
         );
 
       default:

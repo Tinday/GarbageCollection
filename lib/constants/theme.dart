@@ -34,6 +34,9 @@ const Color incomeGreenColor = Color(0xff0C981C);
 const Color lightGreyColor = Color(0xffF6F6F6);
 const Color lightBlackColor = Color(0xff3E3E3E);
 const Color greyGraphColor = Color(0xffE9E9EA);
+const Color greenColor = Color(0xff00BE33);
+const Color redChipColor = Color(0xffDC0000);
+
 // elevated button theme
 final ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(

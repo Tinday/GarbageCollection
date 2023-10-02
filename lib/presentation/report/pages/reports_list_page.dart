@@ -84,6 +84,7 @@ class _ReportsListPageState extends State<ReportsListPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Row(
                                   children: [
@@ -93,14 +94,46 @@ class _ReportsListPageState extends State<ReportsListPage> {
                                           fontWeight: FontWeight.bold,
                                           color: accentColor),
                                     ),
-                                    Text(
-                                      vm.reports?[index]?.addressOfDumping ??
-                                          '',
+                                    Expanded(
+                                      child: Text(
+                                        vm.reports?[index]?.addressOfDumping ??
+                                            '',
+                                      ),
                                     ),
-                                    const Spacer(),
                                     const Icon(Icons.chevron_right)
                                   ],
                                 ),
+                                const SizedBox(height: 20),
+                                if (vm.reports?[index]?.isScheduled ?? false)
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: greenColor.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 14,
+                                    ),
+                                    child: const Text(
+                                      'Scheduled',
+                                      style: TextStyle(color: greenColor),
+                                    ),
+                                  )
+                                else
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: redChipColor.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 14,
+                                    ),
+                                    child: const Text(
+                                      'Not Scheduled',
+                                      style: TextStyle(color: redChipColor),
+                                    ),
+                                  )
                               ],
                             ),
                           ),
